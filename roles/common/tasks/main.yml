@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for common
+- name: Upgrade & Remove Packages
+  ansible.builtin.package:
+    name: "*"
+    state: latest
+    autoremove: yes
+    
+- name: Install the basics
+  ansible.builtin.package:
+    name:
+      - sudo
+      - net-tools
+      - curl
+      - ufw
+      - htop
+      - samba
+      - unzip
+      - zip
+    state: latest
+
+- name: Install Fedora specific packages
+  ansible.builtin.package:
+    name:
+      - python3-libdnf5
+    state: latest
+  when: ansible_facts['os_family'] == "RedHat"
+
+
+- name: Copy custom profile script
+  ansible.builtin.copy:
+    src: ./templates/motd.sh 
+    dest: /etc/profile.d/motd.sh
+    mode: '0644'

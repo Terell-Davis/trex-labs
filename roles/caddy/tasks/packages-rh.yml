@@ -1,0 +1,17 @@
+---
+- name: Install requirements (Fedora)
+  ansible.builtin.package:
+    name:
+      - dnf5-plugins
+    state: present
+
+- name: Enable Caddy COPR repository
+  command: dnf copr enable @caddy/caddy
+  args:
+    warn: false
+
+- name: Install Caddy
+  ansible.builtin.package:
+    name:
+      - caddy
+    state: present

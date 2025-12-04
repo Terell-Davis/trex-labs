@@ -1,0 +1,81 @@
+---
+- name: Ping Test
+  hosts: all
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+- name: Installing Updates & Common Packages
+  hosts: all
+  roles:
+   - common
+  become: true
+
+- name: Create User(s)
+  hosts: all
+  roles:
+   - ryandaniels.create_users
+  vars_files:
+   - ./useradd
+  become: true
+
+- name: Installing dotfiles
+  hosts: all
+  roles:
+   - geerlingguy.dotfiles
+  vars:
+   dotfiles_repo: "https://github.com/Terell-Davis/dotfiles.git"
+   dotfiles_repo_version: master
+   dotfiles_repo_local_destination: "~/Documents/dotfiles"
+   dotfiles_home: "~"
+   dotfiles_files:
+    - .aliases
+    - .bash_profile
+    - .bash_prompt
+    - .exports
+
+- name: Setup ufw
+  hosts: secure
+  roles:
+   - ufw
+  vars:
+   ports:
+    - 80
+  become: true
+
+- name: Install Caddy Webserver
+  hosts: web
+  roles:
+   - caddy
+  become: true
+
+- name: Install Plex Server
+  hosts: plexserver
+  roles:
+   - plex
+  become: true
+
+- name: Install Jellyfin Server
+  hosts: TestServer2
+  roles:
+   - ansible-jellyfin
+  vars:
+   jellyfin_name: "jellyfin"
+   jellyfin_group: "arcana"
+   jellyfin_skip_restart: false
+   jellyfin_enable_fail2ban: false
+   jellyfin_fail2ban_ports:
+    - "80"
+    - "443"
+   jellyfin_fail2ban_maxretry: "3"
+   jellyfin_fail2ban_bantime: "6000"
+   jellyfin_fail2ban_findtime: "600"
+
+   jellyfin_cache_dir: "/var/cache/jellyfin"
+   jellyfin_log_dir: "/var/log/jellyfin"
+   jellyfin_config_dir: "/etc/jellyfin"
+   jellyfin_data_dir: "/var/lib/jellyfin"
+
+   jellyfin_ffmpeg_bin: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+   jellyfin_web_bin: "/usr/share/jellyfin/web"
+  become: true

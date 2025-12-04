@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+.idea
+.ansible
+
+homelab
+test-lab
+
+.vaultpass
+.retry
+*.secret
+useradd
+

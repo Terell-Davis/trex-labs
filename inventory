@@ -1,0 +1,17 @@
+# Just an example of my ansible inventory
+# Roles: common
+[fedora]
+testserver ansible_host=192.168.1.3
+
+# Roles: common
+[debian]
+testserver2 ansible_host=192.168.1.4
+
+# Roles: caddy
+[web]
+testserver
+testserver2
+
+# Roles: UFW
+[secure] 
+testserver

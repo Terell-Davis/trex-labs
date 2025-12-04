@@ -1,0 +1,45 @@
+---
+- name: Install requirements (Debian)
+  ansible.builtin.package:
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+      - curl
+    state: present
+  become: true
+
+- name: Download and add Caddy GPG key
+  shell: curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  args:
+    executable: /bin/bash
+  become: true
+
+- name: Add Caddy APT source
+  shell: curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
+  args:
+    executable: /bin/bash
+  become: true
+
+- name: Set permissions on the GPG keyring
+  file:
+    path: /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+    mode: '0644'
+  become: true
+
+- name: Set permissions on the APT sources list
+  file:
+    path: /etc/apt/sources.list.d/caddy-stable.list
+    mode: '0644'
+  become: true
+
+- name: Update APT package index
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install Caddy
+  apt:
+    name: caddy
+    state: present
+  become: true
