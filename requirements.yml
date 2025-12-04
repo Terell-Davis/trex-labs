@@ -1,0 +1,10 @@
+---
+roles:
+  - name: community.general
+  # Role: create-user
+  - name: ryandaniels.create_users
+  # Role: dotfiles
+  - name: geerlingguy.dotfiles
+  # Role: ansible-jellyfin 
+  - name: ansible-jellyfin
+    src: https://github.com/Terell-Davis/ansible-jellyfin.git
