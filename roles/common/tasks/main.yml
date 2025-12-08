@@ -18,6 +18,7 @@
       - samba
       - unzip
       - zip
+      - git
     state: latest
 
 - name: Install Fedora specific packages
