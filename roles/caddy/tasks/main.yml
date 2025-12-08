@@ -3,9 +3,9 @@
 # tasks file for caddy
 - name: Install Caddy (Debian)
   ansible.builtin.include_tasks: packages-deb.yml
-  when: ansible_distribution == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Install Caddy (Fedora)
   ansible.builtin.include_tasks: packages-rh.yml
-  when: ansible_distribution == "RedHat"
+  when: ansible_facts['os_family'] == "RedHat"
   
