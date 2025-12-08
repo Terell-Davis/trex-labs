@@ -7,7 +7,8 @@ I might miss/add stuff so I'll do my best to keep this readme updated
 - Common base level packages I always use.
 - dotfiles setup
 - Create User(s)
-- Caddy Install (Fdora/Debian) #TODO: Setup CadyFile config
+- Caddy Install (Fedora/Debian) #TODO: Setup CadyFile config
+- Docker Install
 - Plex Install (Debian)
 - Jellyfin Install (Debian)
 - UFW Setup
@@ -137,6 +138,24 @@ Example in a playbook.
   become: true
 ```
 ---
+### [Docker](https://github.com/geerlingguy/ansible-role-docker)
+
+Example of how I use this in a playbook.
+```yml
+- name: Install Docker
+  hosts: Test
+  roles:
+    -  geerlingguy.pip
+    -  geerlingguy.docker
+  vars:
+   docker_users:
+    - root
+   pip_install_packages:
+    - name:
+        - docker
+  become: true
+```
+---
 ### UFW
 This role will always allow `Openssh`. The ports var is for any additional port.
 Example in a playbook.
@@ -196,8 +215,12 @@ Example in a playbook.
 ### Contributes
   Contributions are welcomed!
 ### Credits
-* [geerlingguy/ansible-role-dotfiles](https://github.com/jakob1379/ansible-role-create-users?tab=readme-ov-file#how-to-generate-password)
-* [jakob1379/ansible-role-create-users](https://github.com/geerlingguy/ansible-role-dotfiles)
+* [geerlingguy/ansible-role-dotfiles](https://github.com/geerlingguy/ansible-role-dotfiles)
+
+* [geerlingguy/ansible-role-docker](https://github.com/geerlingguy/ansible-role-docker)
+
+* [jakob1379/ansible-role-create-users](https://github.com/jakob1379/ansible-role-create-users)
+
 * [sleepy-nols/ansible-jellyfin](https://github.com/sleepy-nols/ansible-jellyfin)
   - My Fork: [Terell-Davis/ansible-jellyfin](https://github.com/Terell-Davis/ansible-jellyfin#)
 ---

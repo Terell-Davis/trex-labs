@@ -8,27 +8,16 @@
      ansible.builtin.debug:
        msg: Hello world
 
-- name: Install Jellyfin Server
-  hosts: TestServer2
+- name: Install Docker
+  hosts: Test
   roles:
-    - ansible-jellyfin
+    -  geerlingguy.pip
+    -  geerlingguy.docker
   vars:
-    jellyfin_name: "jellyfin-test"
-    jellyfin_group: "somethinghere"
-    jellyfin_skip_restart: false
-    jellyfin_enable_fail2ban: false
-    jellyfin_fail2ban_ports:
-    - "80"
-    - "443"
-    jellyfin_fail2ban_maxretry: "3"
-    jellyfin_fail2ban_bantime: "6000"
-    jellyfin_fail2ban_findtime: "600"
-
-    jellyfin_cache_dir: "/var/cache/jellyfin"
-    jellyfin_log_dir: "/var/log/jellyfin"
-    jellyfin_config_dir: "/etc/jellyfin"
-    jellyfin_data_dir: "/var/lib/jellyfin"
-
-    jellyfin_ffmpeg_bin: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
-    jellyfin_web_bin: "/usr/share/jellyfin/web"
+   docker_users:
+    - root
+   pip_install_packages:
+    - name:
+        - packaging
+        - docker
   become: true

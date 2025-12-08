@@ -1,6 +1,8 @@
 ---
-roles:
+collections:
   - name: community.general
+
+roles:
   # Role: create-user
   - name: ryandaniels.create_users
   # Role: dotfiles
@@ -8,3 +10,6 @@ roles:
   # Role: ansible-jellyfin 
   - name: ansible-jellyfin
     src: https://github.com/Terell-Davis/ansible-jellyfin.git
+  # Role: Install Docker & Manage
+  - name: geerlingguy.docker
+  - name: geerlingguy.pip
