@@ -1,10 +1,14 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # tasks file for common
-- name: Upgrade & Remove Packages
+- name: Upgrade Packages
   ansible.builtin.package:
     name: "*"
     state: latest
+
+- name: Autoremove Packages
+  ansible.builtin.package:
+    state: absent
     autoremove: yes
     
 - name: Install the basics
