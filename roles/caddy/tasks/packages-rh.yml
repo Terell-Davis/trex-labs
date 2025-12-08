@@ -6,9 +6,15 @@
       - dnf-plugins-core
     state: present
 
-- name: Install Caddy
+- name: Enable Caddy repo
   community.general.copr:
     name: '@caddy/caddy'
     chroot: fedora-rawhide-{{ ansible_facts.architecture }}
     includepkgs:
       - caddy
+
+- name: Install Caddy
+  ansible.builtin.package:
+    name:
+      - caddy
+    state: present
