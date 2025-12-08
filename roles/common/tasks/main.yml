@@ -23,6 +23,7 @@
       - unzip
       - zip
       - git
+      - gpg2
     state: latest
 
 - name: Install Fedora specific packages
