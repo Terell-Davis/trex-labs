@@ -29,6 +29,7 @@
   ansible.builtin.package:
     name:
       - python3-libdnf5
+      - dnf-plugins-core
       - gnupg2
       - libxml2-devel
       - libxslt-devel

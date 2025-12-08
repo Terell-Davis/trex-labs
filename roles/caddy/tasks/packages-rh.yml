@@ -3,15 +3,12 @@
   ansible.builtin.package:
     name:
       - dnf5-plugins
+      - dnf-plugins-core
     state: present
-
-- name: Enable Caddy COPR repository
-  command: dnf copr enable @caddy/caddy
-  args:
-    warn: false
 
 - name: Install Caddy
-  ansible.builtin.package:
-    name:
+  community.general.copr:
+    name: '@caddy/caddy'
+    chroot: fedora-rawhide-{{ ansible_facts.architecture }}
+    includepkgs:
       - caddy
-    state: present
