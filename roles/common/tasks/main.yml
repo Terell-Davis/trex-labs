@@ -29,7 +29,11 @@
   ansible.builtin.package:
     name:
       - python3-libdnf5
-      - gpg2
+      - gnupg2
+      - libxml2-devel
+      - libxslt-devel
+      - gcc
+      - python3-devel
     state: latest
   when: ansible_facts['os_family'] == "RedHat"
 
