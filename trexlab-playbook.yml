@@ -4,12 +4,16 @@
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
+  tags:
+    - ping-test
 
 - name: Installing Updates & Common Packages
   hosts: all
   roles:
    - common
   become: true
+  tags:
+    - common-install
 
 - name: Create User(s)
   hosts: all
@@ -18,6 +22,8 @@
   vars_files:
    - ./useradd
   become: true
+  tags:
+    - createuser
 
 # Make sure to have git install, I didn't do it here incase this needs to be run as a non-root user.
 - name: Installing dotfiles
@@ -35,6 +41,23 @@
     - .bash_prompt
     - .exports
     - .bashrc
+  tags:
+    - install-dotfiles
+
+- name: Install Docker
+  hosts: docker
+  roles:
+    -  geerlingguy.pip
+    -  geerlingguy.docker
+  vars:
+   docker_users:
+    - root
+   pip_install_packages:
+    - name:
+        - docker
+  become: true
+  tags:
+    - install-docker
 
 - name: Setup ufw
   hosts: secure
@@ -44,18 +67,24 @@
    ports:
     - 80
   become: true
+  tags:
+    - install-ufw
 
 - name: Install Caddy Webserver
   hosts: web
   roles:
    - caddy
   become: true
+  tags:
+    - install-caddy
 
 - name: Install Plex Server
   hosts: plexserver
   roles:
    - plex
   become: true
+  tags:
+    - install-plex
 
 - name: Install Jellyfin Server
   hosts: TestServer2
@@ -81,3 +110,5 @@
    jellyfin_ffmpeg_bin: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
    jellyfin_web_bin: "/usr/share/jellyfin/web"
   become: true
+  tags:
+    - install-jellyfin
