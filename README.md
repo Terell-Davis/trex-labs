@@ -17,7 +17,7 @@ I might miss/add stuff so I'll do my best to keep this readme updated
 ## Setup/Install
 
 Run requirements.yml:
-`ansible-galaxy role install -r requirements.yml`
+`ansible-galaxy install -r requirements.yml`
 
 requirements.yml
 ```yml
