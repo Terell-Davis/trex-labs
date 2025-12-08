@@ -55,6 +55,22 @@ echo "RAM Usage: $RAM"
 echo "=================================="
 
 ```
+- These are the current packages I have installing.
+```yml
+- sudo
+- net-tools
+- curl
+- ufw
+- htop
+- samba
+- unzip
+- zip
+- git
+
+# Fedora specific for Ansible 
+- python3-libdnf5
+```
+
 ---
 ### [Create User(s)](https://github.com/jakob1379/ansible-role-create-users)
 Need to create a secrets file to define user information. Plenty of examples on jakob1379 repo but here is an example of what I use.
