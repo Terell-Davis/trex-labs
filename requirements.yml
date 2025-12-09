@@ -1,6 +1,7 @@
 ---
 collections:
   - name: community.general
+  - name: ansible.posix
 
 roles:
   # Role: create-user
@@ -13,3 +14,4 @@ roles:
   # Role: Install Docker & Manage
   - name: geerlingguy.docker
   - name: geerlingguy.pip
+  - name: nvjacobo.caddy

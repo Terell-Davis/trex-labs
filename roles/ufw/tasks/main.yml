@@ -11,7 +11,7 @@
 - name: UFW - Allow SSH connections
   community.general.ufw:
     rule: allow
-    name: OpenSSH
+    port: 22
   become: true
 
 - name: UFW - Allow SSH connections

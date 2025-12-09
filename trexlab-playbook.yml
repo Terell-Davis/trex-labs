@@ -74,7 +74,10 @@
 - name: Install Caddy Webserver
   hosts: web
   roles:
-   - caddy
+   - nvjacobo.caddy
+  vars:
+    caddy_package: caddy
+    caddy_package_state: present
   become: true
   tags:
     - caddy

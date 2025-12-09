@@ -128,13 +128,16 @@ Example in a playbook. This is using my dotfiles repo
       - .bashrc
 ```    
 ---
-### Caddy
+### [Caddy](https://github.com/nvjacobo/caddy)
 Example in a playbook.
 ```yml
 - name: Install Caddy Webserver
   hosts: web
   roles:
-    - caddy
+    - nvjacobo.caddy
+  vars:
+    caddy_package: caddy
+    caddy_package_state: present
   become: true
 ```
 ---
@@ -216,6 +219,8 @@ Example in a playbook.
   Contributions are welcomed!
 ### Credits
 * [geerlingguy/ansible-role-dotfiles](https://github.com/geerlingguy/ansible-role-dotfiles)
+
+* [nvjacobo/caddy](https://github.com/nvjacobo/caddy)
 
 * [geerlingguy/ansible-role-docker](https://github.com/geerlingguy/ansible-role-docker)
 
